@@ -1,0 +1,61 @@
+.email-li {
+    padding: 5px 10px 5px 10px;
+}
+
+.email-li:hover {
+    box-shadow: inset 1px 0 0 #dadce0,
+        inset -1px 0 0 #dadce0,
+        0 1px 2px 0 rgba(60, 64, 67, .3),
+        0 1px 3px 1px rgba(60, 64, 67, .15);
+    position: relative;
+}
+
+.email-li:hover .email-actions {
+    display: inline-block;
+    grid-row: 1;
+}
+
+.star-div {
+
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center;
+}
+
+.star-icon-on {
+    display: flex;
+    color: rgb(240 216 40);
+
+}
+
+.star-icon-off {
+    display: flex;
+    color: gray
+}
+
+.email-actions {
+    grid-column: 4;
+    justify-self: end;
+}
+
+.email-actions>button {
+    border: unset;
+}
+
+.icon-action-btn {
+    font-size: 17px;
+    color: #5b5858;
+}
+
+.unRead {
+    background-color: white;
+    font-weight: bold;
+}
+
+.unRead p {
+    font-weight: bold;
+}
+
+.read {
+    background-color: rgb(238 242 246);
+}

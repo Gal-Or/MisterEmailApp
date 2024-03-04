@@ -1,0 +1,29 @@
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 20px;
+}
+
+/* GRIDS */
+.simple-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 10px;
+}
+
+.main-app {
+    display: grid;
+    grid-template-columns: 238px auto 50px;
+    grid-template-rows: min-content auto 50px;
+}
+
+.li-grid {
+    /* Defines the grid of email in the list */
+    display: grid;
+    grid-template-columns: 35px minmax(168px, 168px) minmax(0, auto) minmax(auto, 168px);
+    /* star | actions+from | subject+body | date <-> actions */
+    grid-template-rows: 30px;
+    align-items: center;
+}

@@ -1,0 +1,42 @@
+.email-preview {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 2/-1;
+    grid-row: 1;
+}
+
+.email-li:hover .date-preview {
+    display: none;
+}
+
+.email-prev-link {
+    display: contents;
+}
+
+.from-preview {
+    display: flex;
+    grid-column: 1;
+    align-items: center;
+}
+
+.star {
+    grid-column: 1;
+
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.subject-body-preview {
+    grid-column: 2;
+}
+
+.date-preview {
+    grid-column: 3;
+    justify-self: end;
+}
+
+.subject-body-preview {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
