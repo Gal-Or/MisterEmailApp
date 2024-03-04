@@ -26,17 +26,16 @@
     margin-right: 5px;
 }
 
-.subject-body-preview {
-    grid-column: 2;
-}
-
 .date-preview {
     grid-column: 3;
     justify-self: end;
+    font-size: .75rem;
 }
 
 .subject-body-preview {
+    grid-column: 2;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
 }

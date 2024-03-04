@@ -1,6 +1,10 @@
 .email-li {
     padding: 5px 10px 5px 10px;
+    border: solid;
+    border-width: thin;
+    border-color: #80808014;
 }
+
 
 .email-li:hover {
     box-shadow: inset 1px 0 0 #dadce0,
@@ -38,9 +42,10 @@
     justify-self: end;
 }
 
-.email-actions>button {
+/* .email-actions>button {
     border: unset;
-}
+    background-color: transparent;
+} */
 
 .icon-action-btn {
     font-size: 17px;

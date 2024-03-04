@@ -1,20 +1,19 @@
 import { Link } from 'react-router-dom'
 
-export function AppHeader() {
+import { EmailFilter } from "../cmps/EmailFilter"
 
+export function AppHeader({ filterBy, setFilterBy }) {
+
+    function onSetFilter(fieldsToUpdate) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
+
+    }
 
     return (
         <header className="app-header">
             <img className="gmail-logo" src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png" srcSet="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png 1x, https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_2x_r5.png 2x " alt="" aria-hidden="true" role="presentation" ></img>
-            {/* <input className="input-search" aria-label="Search mail" autoComplete="off" placeholder="Search mail" value=""
-                type="text" dir="ltr" spellCheck="false" aria-haspopup="true" aria-live="off"
-                aria-owns="gs_sbt50" aria-hidden="false">
-            </input> */}
-            {/* <div className="buttonIn">
-                <button className='btn' id="clear">clear</button>
-                <input className="input-search" type="text" id="enter" />
 
-            </div> */}
+            <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
             <section className="links-container">
                 <Link to="/" className='link'>Home</Link>
                 <Link to="/about" className='link'>About</Link>
@@ -23,7 +22,5 @@ export function AppHeader() {
         </header>
     )
 }
-
-<input  ></input>
 
 

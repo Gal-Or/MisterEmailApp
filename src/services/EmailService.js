@@ -22,22 +22,23 @@ _createEmails()
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
     if (filterBy) {
-        console.log("in filter: ", filterBy);
         emails = emails.filter(email => isMatchToFilter(email, filterBy))
     }
     return emails
 }
 
 function isMatchToFilter(email, filterBy) {
-    //console.log("in isMatchToFilter: ", filterBy);
-    let { txt, isRead } = filterBy
-    // typeof(isRead) = object , typeof(email.isRead) = boolean
 
+    let { txt, isRead } = filterBy
+    false == null
     if (txt != '') {
-        return ((email.subject.toLowerCase().includes(txt.toLowerCase()) ||
-            email.body.toLowerCase().includes(txt.toLowerCase()))
-            && (isRead === null ? true : `${email.isRead}` == `${isRead}`))
+        return (
+            (email.from.toLowerCase().includes(txt.toLowerCase()) ||
+                email.subject.toLowerCase().includes(txt.toLowerCase()) ||
+                email.body.toLowerCase().includes(txt.toLowerCase())) &&
+            (isRead === null ? true : `${email.isRead}` == `${isRead}`))
     } else {
+        // 
         return (isRead === null ? true : `${email.isRead}` == `${isRead}`)
     }
 

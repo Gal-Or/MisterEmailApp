@@ -3,25 +3,14 @@ import { useEffect, useState } from "react"
 import { emailService } from "../services/EmailService"
 
 import { EmailList } from "../cmps/EmailList"
-import { EmailFilter } from "../cmps/EmailFilter"
 
-
-
-
-export function EmailIndex() {
+export function EmailIndex({ filterBy }) {
     const [emails, setEmails] = useState(null)
-    const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
-
 
     useEffect(() => {
         loadEmails()
     }, [filterBy])
-
-    function onSetFilter(fieldsToUpdate) {
-        setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
-
-    }
-
+    /* use effect listening to changes on filterBy that occure in appHeader*/
 
     async function loadEmails() {
 
@@ -85,7 +74,6 @@ export function EmailIndex() {
     if (!emails) return <div>Loading...</div>
     return (
         <section className="email-index">
-            <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
             <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />
         </section>
     )

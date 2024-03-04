@@ -18,8 +18,14 @@ export function EmailDetails() {
 
     async function loadEmail() {
         try {
-            const email = await emailService.getById(params.emailId)
-            setEmail(email)
+            let curEmail = await emailService.getById(params.emailId)
+
+            if (curEmail.isRead === false)
+                curEmail = { ...curEmail, isRead: true }
+
+            setEmail(curEmail)
+            emailService.save(curEmail)
+
         } catch (err) {
             navigate('/email')
             console.log('Error in loadEmail', err)
