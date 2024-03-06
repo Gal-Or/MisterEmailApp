@@ -79,17 +79,10 @@ input {
     -webkit-border-radius: 100px;
 }
 
-.main-app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-
-.main-app main {
+/* .main-app main {
     flex-grow: 1;
     width: 100%;
-}
+} */
 
 .icon {
     font-size: 17px;

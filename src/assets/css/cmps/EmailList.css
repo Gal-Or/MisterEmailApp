@@ -28,13 +28,13 @@
 
 .star-icon-on {
     display: flex;
-    color: rgb(240 216 40);
+    color: rgb(243, 199, 75);
 
 }
 
 .star-icon-off {
     display: flex;
-    color: gray
+    color: rgb(186, 190, 194);
 }
 
 .email-actions {
@@ -62,5 +62,5 @@
 }
 
 .read {
-    background-color: rgb(238 242 246);
+    background-color: rgb(242, 246, 252);
 }

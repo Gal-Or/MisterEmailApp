@@ -2,31 +2,29 @@
     display: grid;
     grid-template-columns: subgrid;
     /* align-items: center; */
-    margin: 5px;
+    /* margin: 5px; */
 
 }
 
-/* .app-header h1.logo {
-    flex-grow: 1;
-    font-weight: 600;
+.menu-logo {
+    display: flex;
+    align-items: center;
 }
-
-.app-header .back {
-    flex-grow: 1;
-}
-
-.app-header nav a:not(:last-child) {
-    margin-right: 10px;
-}
-
-.app-header section.container>section {
-    flex-grow: 1;
-} */
 
 .gmail-logo {
     grid-column: 1;
+    grid-row: 1;
     width: 109px;
     height: 40px;
+}
+
+.menu-icon {
+    grid-column: 1;
+    grid-row: 1;
+    color: #5f6368;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 12px;
 }
 
 .input-search {

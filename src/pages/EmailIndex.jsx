@@ -2,10 +2,17 @@ import { useEffect, useState } from "react"
 
 import { emailService } from "../services/EmailService"
 
+import { AppHeader } from '../cmps/AppHeader.jsx';
+import { MenuBar } from '../cmps/MenuBar.jsx';
 import { EmailList } from "../cmps/EmailList"
+import { AppFooter } from '../cmps/AppFooter.jsx';
 
-export function EmailIndex({ filterBy }) {
+
+export function EmailIndex() {
     const [emails, setEmails] = useState(null)
+
+    const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
+
 
     useEffect(() => {
         loadEmails()
@@ -73,8 +80,13 @@ export function EmailIndex({ filterBy }) {
     console.log(emails);
     if (!emails) return <div>Loading...</div>
     return (
-        <section className="email-index">
-            <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />
+        <section className='main-app' >
+            <AppHeader filterBy={filterBy} setFilterBy={setFilterBy} />
+            <MenuBar />
+            <div className="email-list">
+                <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />
+            </div>
+            {/* <AppFooter /> */}
         </section>
     )
 }

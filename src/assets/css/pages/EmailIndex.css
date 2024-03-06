@@ -1,0 +1,21 @@
+.app-header {
+    grid-column: 1/-1;
+    grid-row: 1;
+    /* padding: 8px; */
+}
+
+.menu-bar {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.email-list {
+    background-color: white;
+    padding: 20px 0 10px 0;
+    border-radius: 15px;
+}
+
+.app-footer {
+    grid-column: 1/-1;
+    grid-row: 3;
+}
