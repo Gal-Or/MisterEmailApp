@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { useLocation, useNavigate, Outlet, useParams } from 'react-router-dom'
+
 
 import { emailService } from "../services/EmailService"
 
@@ -9,20 +11,33 @@ import { AppFooter } from '../cmps/AppFooter.jsx';
 
 
 export function EmailIndex() {
+    const params = useParams()
+    const navigate = useNavigate()
+
     const [emails, setEmails] = useState(null)
+    const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter(params.folder))
 
-    const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
-
+    const { folder, txt, isRead } = filterBy
 
     useEffect(() => {
+        if (!params.folder)
+            navigate('inbox')
+
+        console.log("filterby:", filterBy);
         loadEmails()
     }, [filterBy])
-    /* use effect listening to changes on filterBy that occure in appHeader*/
+    /* use effect listening to changes on filterBy that occure in appHeader and menuBar*/
+
+
+    function onSetFilter(fieldsToUpdate) {
+        setFilterBy((prevFilterBy) => ({ ...prevFilterBy, ...fieldsToUpdate }))
+    }
 
     async function loadEmails() {
 
         try {
             const emails = await emailService.query(filterBy)
+            console.log(emails);
             setEmails(emails)
         } catch (err) {
             console.log('Error in load emails', err);
@@ -60,7 +75,6 @@ export function EmailIndex() {
     }
 
     async function onStaring(emailId) {
-        console.log("in onStaring");
         try {
             let email = await emailService.getById(emailId)
             email.isStarred = !email.isStarred
@@ -77,15 +91,19 @@ export function EmailIndex() {
         }
     }
 
-    console.log(emails);
+
     if (!emails) return <div>Loading...</div>
     return (
         <section className='main-app' >
-            <AppHeader filterBy={filterBy} setFilterBy={setFilterBy} />
-            <MenuBar />
-            <div className="email-list">
-                <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />
+            <AppHeader filterBy={{ txt, isRead }} onSetFilter={onSetFilter} />
+            <MenuBar filterBy={{ folder }} onSetFilter={onSetFilter} />
+            <div className="main-content">
+
+                {!params.emailId && <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />}
+                <Outlet />
+                {/* outlet is renders the emailDetails cmp */}
             </div>
+
             {/* <AppFooter /> */}
         </section>
     )

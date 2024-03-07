@@ -5,12 +5,8 @@ import { EmailFilter } from "../cmps/EmailFilter"
 import { GiHamburgerMenu } from "react-icons/gi";
 
 
-export function AppHeader({ filterBy, setFilterBy }) {
+export function AppHeader({ filterBy, onSetFilter }) {
 
-    function onSetFilter(fieldsToUpdate) {
-        setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
-
-    }
 
     return (
         <header className="app-header">

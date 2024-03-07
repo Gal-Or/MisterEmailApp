@@ -13,35 +13,60 @@ export const emailService = {
 const STORAGE_KEY = 'emails'
 
 const loggedinUser = {
-    email: 'user@appsus.com',
-    fullname: 'Mahatma Appsus'
+    email: 'galor@gmail.com',
+    fullname: 'Gal Or'
 }
 
 _createEmails()
 
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
-    if (filterBy) {
-        emails = emails.filter(email => isMatchToFilter(email, filterBy))
-    }
+    if (filterBy)
+        emails = filterEmails(emails, filterBy)
+
     return emails
 }
 
-function isMatchToFilter(email, filterBy) {
+function filterEmails(emails, filterBy) {
 
-    let { txt, isRead } = filterBy
-    false == null
-    if (txt != '') {
-        return (
-            (email.from.toLowerCase().includes(txt.toLowerCase()) ||
-                email.subject.toLowerCase().includes(txt.toLowerCase()) ||
-                email.body.toLowerCase().includes(txt.toLowerCase())) &&
-            (isRead === null ? true : `${email.isRead}` == `${isRead}`))
-    } else {
-        // 
-        return (isRead === null ? true : `${email.isRead}` == `${isRead}`)
+    const { folder, txt, isRead } = filterBy
+    let filteredEmails
+
+    if (txt != '')
+        filteredEmails = emails.filter(email => isMatchToTxt(email, txt))
+    else
+        filteredEmails = emails
+
+    switch (isRead) {
+        case 'true':
+            filteredEmails = filteredEmails.filter(email => email.isRead)
+            break;
+        case 'false':
+            filteredEmails = filteredEmails.filter(email => !email.isRead)
+            break
+        default:
+            filteredEmails = filteredEmails
     }
+    switch (folder) {
+        case 'inbox':
+            return filteredEmails.filter(email => email.to === loggedinUser.email)
+        case 'sent':
+            return filteredEmails.filter(email => email.from === loggedinUser.email)
+        case 'starred':
+            return filteredEmails.filter(email => email.isStarred)
+        case 'drafts':
+            return filteredEmails.filter(email => !email.sentAt)
+        case 'trash':
+            return filteredEmails.filter(email => email.removedAt)
+    }
+}
 
+function isMatchToTxt(email, txt) {
+
+    return (
+        (email.from.toLowerCase().includes(txt.toLowerCase()) ||
+            email.subject.toLowerCase().includes(txt.toLowerCase()) ||
+            email.body.toLowerCase().includes(txt.toLowerCase())))
 }
 
 function getById(id) {
@@ -92,16 +117,16 @@ function _createEmails() {
                 sentAt: Date.now(),
                 removedAt: null,
                 from: 'momo@momo.com',
-                to: 'user@appsus.com'
+                to: 'galor@gmail.com'
             }, {
                 id: 'e2',
                 subject: 'Hey',
                 body: 'How are you?',
-                isRead: false,
+                isRead: true,
                 isStarred: false,
                 sentAt: (date),
                 removedAt: null,
-                from: 'dodo@dodo.com',
+                from: 'galor@gmail.com',
                 to: 'user@appsus.com'
             }, {
                 id: 'e3',
@@ -111,7 +136,7 @@ function _createEmails() {
                 isStarred: false,
                 sentAt: 1677500285,
                 removedAt: null,
-                from: 'gogo@gogo.com',
+                from: 'galor@gmail.com',
                 to: 'user@appsus.com'
             }, {
                 id: 'e4',
@@ -122,7 +147,7 @@ function _createEmails() {
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'bobo@bobo.com',
-                to: 'user@appsus.com'
+                to: 'galor@gmail.com'
             }, {
                 id: 'e5',
                 subject: 'Hate you!',
@@ -132,16 +157,16 @@ function _createEmails() {
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'momo@momo.com',
-                to: 'user@appsus.com'
+                to: 'galor@gmail.com'
             }, {
                 id: 'e6',
                 subject: 'Hate you!',
                 body: 'We should never meet :(',
-                isRead: false,
+                isRead: true,
                 isStarred: false,
                 sentAt: 1709043485,
                 removedAt: null,
-                from: 'momo@momo.com',
+                from: 'galor@gmail.com',
                 to: 'user@appsus.com'
             }, {
                 id: 'e7',
@@ -151,7 +176,7 @@ function _createEmails() {
                 isStarred: false,
                 sentAt: 1709043485,
                 removedAt: null,
-                from: 'momo@momo.com',
+                from: 'galor@gmail.com',
                 to: 'user@appsus.com'
             }, {
                 id: 'e8',
@@ -162,15 +187,16 @@ function _createEmails() {
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'momo@momo.com',
-                to: 'user@appsus.com'
+                to: 'galor@gmail.com'
             }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
     }
 }
 
-function getDefaultFilter() {
+function getDefaultFilter(folder) {
     return {
+        folder: folder ? folder : 'inbox',
         txt: '',
         isRead: null
     }
