@@ -20,8 +20,9 @@ export function EmailIndex() {
     const { folder, txt, isRead } = filterBy
 
     useEffect(() => {
-        if (!params.folder)
-            navigate('inbox')
+        // console.log("params", params);
+        // if (!params.folder)
+        //     navigate('inbox')
 
         console.log("filterby:", filterBy);
         loadEmails()
