@@ -31,6 +31,7 @@ export function EmailIndex() {
 
     useEffect(() => {
         setSearchParams(filterBy)
+        console.log(filterBy);
         loadEmails()
     }, [filterBy])
     /* use effect listening to changes on filterBy that occure in appHeader and menuBar*/

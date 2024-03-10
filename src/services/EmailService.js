@@ -26,6 +26,7 @@ _createEmails()
 
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
+    console.log("before filter", emails);
     if (filterBy)
         emails = filterEmails(emails, filterBy)
 
