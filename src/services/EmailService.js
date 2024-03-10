@@ -220,6 +220,7 @@ function getFilterFromParams(searchParams) {
     for (const field in defaultFilter)
         filterBy[field] = searchParams.get(field) || defaultFilter[field]
 
+    console.log("filterBy in get filter", filterBy);
     return filterBy
 }
 

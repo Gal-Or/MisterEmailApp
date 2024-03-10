@@ -26,13 +26,16 @@ export function EmailIndex() {
     const { folder, txt, isRead } = filterBy
 
     useEffect(() => {
-        getUnreadCountFromService()
+        //getUnreadCountFromService()
     })
 
     useEffect(() => {
+        console.log("start ----------------------------------------");
         setSearchParams(filterBy)
         console.log(filterBy);
         loadEmails()
+        console.log("end ----------------------------------------");
+
     }, [filterBy])
     /* use effect listening to changes on filterBy that occure in appHeader and menuBar*/
 
