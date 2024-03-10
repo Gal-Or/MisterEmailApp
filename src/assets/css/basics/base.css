@@ -90,6 +90,6 @@ input {
 }
 
 a.active {
-    color: rgb(84, 17, 147);
-    font-weight: 600;
+    /* color: rgb(84, 17, 147); */
+    font-weight: bold;
 }

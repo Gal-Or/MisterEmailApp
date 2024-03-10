@@ -1,21 +1,26 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 
+const loggedinUser = {
+    email: 'galor@gmail.com',
+    fullname: 'Gal Or'
+}
+
 export const emailService = {
     query,
     save,
     remove,
     getById,
     createEmail,
-    getDefaultFilter
+    getDefaultFilter,
+    getFilterFromParams,
+    getUnreadCount,
+    loggedinUser
 }
 
 const STORAGE_KEY = 'emails'
 
-const loggedinUser = {
-    email: 'galor@gmail.com',
-    fullname: 'Gal Or'
-}
+
 
 _createEmails()
 
@@ -49,13 +54,13 @@ function filterEmails(emails, filterBy) {
     }
     switch (folder) {
         case 'inbox':
-            return filteredEmails.filter(email => email.to === loggedinUser.email)
+            return filteredEmails.filter(email => email.to === loggedinUser.email && !email.removedAt)
         case 'sent':
-            return filteredEmails.filter(email => email.from === loggedinUser.email)
+            return filteredEmails.filter(email => email.from === loggedinUser.email && !email.removedAt)
         case 'starred':
-            return filteredEmails.filter(email => email.isStarred)
+            return filteredEmails.filter(email => email.isStarred && !email.removedAt)
         case 'drafts':
-            return filteredEmails.filter(email => !email.sentAt)
+            return filteredEmails.filter(email => !email.sentAt && !email.removedAt)
         case 'trash':
             return filteredEmails.filter(email => email.removedAt)
     }
@@ -85,7 +90,6 @@ function save(emailToSave) {
     }
 }
 
-
 function createEmail(subject, body = '', isRead = false,
     isStarred = false, sentAt, removedAt = null, from, to) {
     return {
@@ -110,13 +114,13 @@ function _createEmails() {
         emails = [
             {
                 id: 'e1',
-                subject: 'Hate you!',
+                subject: 'Yum Tov!',
                 body: 'We should never meet :(',
                 isRead: true,
                 isStarred: false,
                 sentAt: Date.now(),
                 removedAt: null,
-                from: 'momo@momo.com',
+                from: 'koko@gmail.com',
                 to: 'galor@gmail.com'
             }, {
                 id: 'e2',
@@ -127,7 +131,7 @@ function _createEmails() {
                 sentAt: (date),
                 removedAt: null,
                 from: 'galor@gmail.com',
-                to: 'user@appsus.com'
+                to: 'nofar@gmail.com'
             }, {
                 id: 'e3',
                 subject: 'Miss you!',
@@ -137,7 +141,7 @@ function _createEmails() {
                 sentAt: 1677500285,
                 removedAt: null,
                 from: 'galor@gmail.com',
-                to: 'user@appsus.com'
+                to: 'noy@gmail.com'
             }, {
                 id: 'e4',
                 subject: 'Love you!',
@@ -146,7 +150,7 @@ function _createEmails() {
                 isStarred: false,
                 sentAt: 1709043485,
                 removedAt: null,
-                from: 'bobo@bobo.com',
+                from: 'dodi@gmail.com',
                 to: 'galor@gmail.com'
             }, {
                 id: 'e5',
@@ -156,37 +160,37 @@ function _createEmails() {
                 isStarred: false,
                 sentAt: 1709043485,
                 removedAt: null,
-                from: 'momo@momo.com',
+                from: 'sozi@gmail.com',
                 to: 'galor@gmail.com'
             }, {
                 id: 'e6',
-                subject: 'Hate you!',
+                subject: 'Good Luck!',
                 body: 'We should never meet :(',
                 isRead: true,
                 isStarred: false,
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'galor@gmail.com',
-                to: 'user@appsus.com'
+                to: 'shalom@gmail.com'
             }, {
                 id: 'e7',
-                subject: 'Hate you!',
+                subject: 'Shalom!',
                 body: 'We should never meet :(',
                 isRead: true,
                 isStarred: false,
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'galor@gmail.com',
-                to: 'user@appsus.com'
+                to: 'kobi@gmail.com'
             }, {
                 id: 'e8',
-                subject: 'Hate you!',
+                subject: 'Mazal Tov!',
                 body: 'We should never meet :(',
                 isRead: false,
                 isStarred: false,
                 sentAt: 1709043485,
                 removedAt: null,
-                from: 'momo@momo.com',
+                from: 'avi@gmail.com',
                 to: 'galor@gmail.com'
             }
         ]
@@ -196,8 +200,26 @@ function _createEmails() {
 
 function getDefaultFilter(folder) {
     return {
-        folder: folder ? folder : 'inbox',
+        // folder: folder ? folder : 'inbox',
+        folder: 'inbox',
         txt: '',
         isRead: null
     }
 }
+
+function getFilterFromParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+
+    for (const field in defaultFilter)
+        filterBy[field] = searchParams.get(field) || defaultFilter[field]
+
+    return filterBy
+}
+
+async function getUnreadCount() {
+
+    let emails = await query({ folder: 'inbox', txt: '', isRead: 'false' })
+    return emails.length
+}
+

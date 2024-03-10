@@ -10,7 +10,7 @@ const navigationLinks = [
     { path: '/drafts', name: 'Drafts', icon: path.drafts },
     { path: '/trash', name: 'Trash', icon: path.trash },
 ]
-export function MenuBar({ filterBy, onSetFilter }) {
+export function MenuBar({ filterBy, onSetFilter, unreadCount }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
@@ -36,7 +36,7 @@ export function MenuBar({ filterBy, onSetFilter }) {
                     onClick={() => { handleChange(folder.name.toLocaleLowerCase()) }}
                     to={folder.path}>
                     <div className="img-icon"><img className="icon" src={folder.icon} alt={folder.name} /></div>
-                    <div className="folder-des"><span className="folder-name">{folder.name}</span> <span className="folder-count"></span></div>
+                    <div className="folder-des"><span className="folder-name">{folder.name}</span><span className="folder-count">{folder.name == 'Inbox' ? `${unreadCount}` : ''}</span></div>
                 </NavLink>
             )
         })}

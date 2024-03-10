@@ -6,6 +6,8 @@ import { HomePage } from './pages/HomePage.jsx';
 import { AboutUs } from './pages/AboutUs.jsx';
 import { EmailIndex } from './pages/EmailIndex.jsx';
 
+import { UserMsg } from './cmps/UserMsg.jsx'
+
 import { EmailDetails } from './cmps/EmailDetails.jsx';
 import { useEffect } from 'react';
 
@@ -17,9 +19,6 @@ export function App() {
         useEffect(() => {
             navigate('inbox')
         }, [])
-
-
-        //navigate
     }
 
     return (
@@ -32,14 +31,11 @@ export function App() {
 
                     <Route path="/" element={<HomePage />} />
                     <Route path="/:folder" element={<EmailIndex />}>
-
                         <Route path="/:folder/:emailId" element={<EmailDetails />} />
                     </Route>
-
-
-
                 </Routes>
             </main>
+            <UserMsg />
         </Router>
     )
 }
