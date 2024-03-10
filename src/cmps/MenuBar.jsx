@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import path from "../services/image-path";
 
 const navigationLinks = [
@@ -23,10 +23,12 @@ export function MenuBar({ filterBy, onSetFilter, unreadCount }) {
     }
 
     return <section className="menu-bar">
-        <div className="compose-btn" >
-            <img className="icon compose-icon" src={path.edit} />
-            <span className="compose">Compose</span>
-        </div>
+        <Link to={`/${filterByToEdit.folder}/compose`} className='compose-link'>
+            <div className="compose-btn" >
+                <img className="icon compose-icon" src={path.edit} />
+                <span className="compose">Compose</span>
+            </div>
+        </Link>
 
         {navigationLinks.map((folder) => {
             return (

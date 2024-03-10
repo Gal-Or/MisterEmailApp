@@ -18,6 +18,10 @@
      border-radius: 0 30px 30px 0;
  }
 
+ .compose-link {
+     display: contents;
+ }
+
  .compose-btn {
      display: grid;
      padding: 10px;

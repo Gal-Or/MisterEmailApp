@@ -3,6 +3,7 @@
 @import "basics/helpers.css";
 @import "basics/layout.css";
 @import "basics/animations.css";
+@import "basics/vars.css";
 
 /* Pages */
 @import "./pages/home.css";
@@ -17,3 +18,4 @@
 @import "./cmps/EmailPreview.css";
 @import "./cmps/EmailDetails.css";
 @import "./cmps/user-msg.css";
+@import "./cmps/EmailCompose.css";

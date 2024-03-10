@@ -9,6 +9,7 @@ import { EmailIndex } from './pages/EmailIndex.jsx';
 import { UserMsg } from './cmps/UserMsg.jsx'
 
 import { EmailDetails } from './cmps/EmailDetails.jsx';
+import { EmailCompose } from './cmps/EmailCompose.jsx';
 import { useEffect } from 'react';
 
 export function App() {
@@ -32,6 +33,7 @@ export function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/:folder" element={<EmailIndex />}>
                         <Route path="/:folder/:emailId" element={<EmailDetails />} />
+                        <Route path="/:folder/compose" element={<EmailCompose />} />
                     </Route>
                 </Routes>
             </main>
