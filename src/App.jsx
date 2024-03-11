@@ -33,7 +33,7 @@ export function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/:folder" element={<EmailIndex />}>
                         <Route path="/:folder/:emailId" element={<EmailDetails />} />
-                        <Route path="/:folder/compose" element={<EmailCompose />} />
+                        {/* <Route path="/:folder/compose" element={<EmailCompose />} /> */}
                     </Route>
                 </Routes>
             </main>

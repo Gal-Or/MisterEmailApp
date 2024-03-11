@@ -10,9 +10,15 @@ const navigationLinks = [
     { path: '/drafts', name: 'Drafts', icon: path.drafts },
     { path: '/trash', name: 'Trash', icon: path.trash },
 ]
-export function MenuBar({ filterBy, onSetFilter, unreadCount }) {
+export function MenuBar({ filterBy, onSetFilter, unreadCount, searchParams }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+    const params = {}
+    searchParams.forEach((value, key) => {
+        params[key] = value;
+    });
+
+    let paramsPath = `?folder=${params["folder"]}&txt=${params["txt"]}&isRead=${params["isRead"]}&compose=new`
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
@@ -23,7 +29,7 @@ export function MenuBar({ filterBy, onSetFilter, unreadCount }) {
     }
 
     return <section className="menu-bar">
-        <Link to={`/${filterByToEdit.folder}/compose`} className='compose-link'>
+        <Link to={`/${params["folder"]}?folder=${params["folder"]}&txt=${params["txt"]}&isRead=${params["isRead"]}&compose=new`} className='compose-link'>
             <div className="compose-btn" >
                 <img className="icon compose-icon" src={path.edit} />
                 <span className="compose">Compose</span>
@@ -37,6 +43,7 @@ export function MenuBar({ filterBy, onSetFilter, unreadCount }) {
                     key={folder.name}
                     onClick={() => { handleChange(folder.name.toLocaleLowerCase()) }}
                     to={folder.path}>
+                    {/* check if add search params to path here when the compose open and we navigate betweem folders */}
                     <div className="img-icon"><img className="icon" src={folder.icon} alt={folder.name} /></div>
                     <div className="folder-des"><span className="folder-name">{folder.name}</span><span className="folder-count">{folder.name == 'Inbox' ? `${unreadCount}` : ''}</span></div>
                 </NavLink>

@@ -10,6 +10,7 @@ import { EmailList } from "../cmps/EmailList"
 import { AppFooter } from '../cmps/AppFooter.jsx';
 
 import { eventBusService, showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
+import { EmailCompose } from "../cmps/EmailCompose.jsx";
 
 
 
@@ -26,8 +27,9 @@ export function EmailIndex() {
     const { folder, txt, isRead } = filterBy
 
     useEffect(() => {
-        //getUnreadCountFromService()
+        getUnreadCountFromService()
     })
+
 
     useEffect(() => {
         console.log("start ----------------------------------------");
@@ -38,6 +40,10 @@ export function EmailIndex() {
 
     }, [filterBy])
     /* use effect listening to changes on filterBy that occure in appHeader and menuBar*/
+
+    function addSearchParams(params) {
+        setSearchParams(params)
+    }
 
 
     async function getUnreadCountFromService() {
@@ -71,15 +77,9 @@ export function EmailIndex() {
                 await emailService.remove(emailId)
                 showSuccessMsg('Conversation deleted forever.')
             }
-
-
-
             setEmails((prevEmails) => {
                 return prevEmails.filter(email => email.id !== emailId)
             })
-
-
-
         } catch (err) {
             console.log('Error in onRemoveEmail', err)
             showErrorMsg('Could not remove email')
@@ -116,6 +116,34 @@ export function EmailIndex() {
 
     }
 
+    function checkIfMatchToCurFilter(email) {
+
+        let isMatch = true
+        if (txt != '')
+            isMatch = isMatchToTxt(email, txt)
+
+        if (isMatch && (isRead == `${email.isRead}` || isRead == null) && folder == 'sent') {
+            console.log("return true");
+            return true
+        }
+        return false
+    }
+
+    async function onSendEmail(email) {
+
+        try {
+            const savedEmail = await emailService.save(email)
+            if (checkIfMatchToCurFilter(email))
+                setEmails(prevEmails => [...prevEmails, savedEmail])
+            showSuccessMsg('Email send.')
+
+        } catch (err) {
+            console.log('Error in onSendEmail', err)
+            showErrorMsg('Could not send email')
+
+        }
+
+    }
 
 
     async function onStaring(emailId) {
@@ -140,11 +168,14 @@ export function EmailIndex() {
     return (
         <section className='main-app' >
             <AppHeader filterBy={{ txt, isRead }} onSetFilter={onSetFilter} />
-            <MenuBar filterBy={{ folder }} onSetFilter={onSetFilter} unreadCount={unreadCount} />
+            <MenuBar filterBy={{ folder }} onSetFilter={onSetFilter} unreadCount={unreadCount} searchParams={searchParams} />
             <div className="main-content">
 
                 {!params.emailId && <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />}
                 <Outlet />
+                {searchParams.get("compose") && <EmailCompose onSendEmail={onSendEmail} />}
+
+
                 {/* outlet is renders the emailDetails cmp */}
             </div>
 

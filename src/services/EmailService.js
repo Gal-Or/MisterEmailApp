@@ -15,6 +15,7 @@ export const emailService = {
     getDefaultFilter,
     getFilterFromParams,
     getUnreadCount,
+    isMatchToTxt,
     loggedinUser
 }
 
@@ -89,16 +90,19 @@ function remove(id) {
 }
 
 function save(emailToSave) {
+    console.log("in save email, e:", emailToSave);
     if (emailToSave.id) {
+        console.log("id exsist");
         return storageService.put(STORAGE_KEY, emailToSave)
     } else {
         return storageService.post(STORAGE_KEY, emailToSave)
     }
 }
 
-function createEmail(subject, body = '', isRead = false,
-    isStarred = false, sentAt, removedAt = null, from, to) {
+function createEmail(subject, body = '', isRead = true,
+    isStarred = false, sentAt = new Date(), removedAt = null, from = loggedinUser.email, to) {
     return {
+
         subject,
         body,
         isRead,
