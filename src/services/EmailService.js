@@ -43,10 +43,10 @@ function filterEmails(emails, filterBy) {
     const { folder, txt, isRead } = filterBy
     let filteredEmails
 
-    // if (txt != '')
-    //     filteredEmails = emails.filter(email => isMatchToTxt(email, txt))
-    // else
-    //     filteredEmails = emails
+    if (txt != '')
+        filteredEmails = emails.filter(email => isMatchToTxt(email, txt))
+    else
+        filteredEmails = emails
 
     switch (isRead) {
         case 'true':
