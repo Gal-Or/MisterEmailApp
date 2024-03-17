@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, Link } from "react-router-dom";
 import path from "../services/image-path";
 
+import { utilService } from "../services/util.service"
+
 const navigationLinks = [
     { path: '/inbox', name: 'Inbox', icon: path.inbox },
     { path: '/sent', name: 'Sent', icon: path.sent },
@@ -13,10 +15,12 @@ const navigationLinks = [
 export function MenuBar({ filterBy, onSetFilter, unreadCount, searchParams }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-    const params = {}
-    searchParams.forEach((value, key) => {
-        params[key] = value;
-    });
+    // const params = {}
+    // searchParams.forEach((value, key) => {
+    //     params[key] = value;
+    // });
+
+    const params = utilService.getSearchParamsArray(searchParams)
 
     let paramsPath = `?folder=${params["folder"]}&txt=${params["txt"]}&isRead=${params["isRead"]}&compose=new`
 

@@ -3,7 +3,8 @@ export const utilService = {
     makeId,
     saveToStorage,
     loadFromStorage,
-    monthName
+    monthName,
+    getSearchParamsArray
 }
 
 
@@ -11,6 +12,14 @@ function monthName(num) {
     let monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     return monthNames[num]
+}
+
+function getSearchParamsArray(searchParams) {
+    const params = {}
+    searchParams.forEach((value, key) => {
+        params[key] = value;
+    });
+    return params
 }
 
 function makeId(length = 5) {

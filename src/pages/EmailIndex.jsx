@@ -8,6 +8,8 @@ import { AppHeader } from '../cmps/AppHeader.jsx';
 import { MenuBar } from '../cmps/MenuBar.jsx';
 import { EmailList } from "../cmps/EmailList"
 import { AppFooter } from '../cmps/AppFooter.jsx';
+import path from "../services/image-path";
+
 
 import { eventBusService, showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { EmailCompose } from "../cmps/EmailCompose.jsx";
@@ -32,12 +34,9 @@ export function EmailIndex() {
 
 
     useEffect(() => {
-        console.log("start ----------------------------------------");
         setSearchParams(filterBy)
-        console.log(filterBy);
+        //console.log(filterBy);
         loadEmails()
-        console.log("end ----------------------------------------");
-
     }, [filterBy])
     /* use effect listening to changes on filterBy that occure in appHeader and menuBar*/
 
@@ -118,29 +117,58 @@ export function EmailIndex() {
 
     function checkIfMatchToCurFilter(email) {
 
+        //console.log("in func ");
         let isMatch = true
         if (txt != '')
             isMatch = isMatchToTxt(email, txt)
 
-        if (isMatch && (isRead == `${email.isRead}` || isRead == null) && folder == 'sent') {
-            console.log("return true");
-            return true
+        //console.log("isMatch", isMatch);
+        //console.log("isRead", isRead);
+        //console.log("isRead === 'null'", isRead === 'null');
+
+        if (isMatch && (isRead == `${email.isRead}` || isRead === 'null')) {
+            console.log("in if match");
+            switch (folder) {
+                case 'sent':
+                    return (email.from === emailService.loggedinUser.email && !email.removedAt && email.sentAt) ? true : false
+                case 'drafts':
+                    return (!email.sentAt && !email.removedAt) ? true : false
+                case 'inbox':
+                    return (email.to === emailService.loggedinUser.email && !email.removedAt)
+            }
         }
         return false
     }
 
-    async function onSendEmail(email) {
+    function checkIfEmailExsist(emailId) {
+
+        let exsist = false
+        emails.forEach(email => {
+            if (email.id === emailId)
+                exsist = true
+        });
+        return exsist
+    }
+
+    async function onComposeEmail(email, okMsg, errMsg) {
 
         try {
             const savedEmail = await emailService.save(email)
-            if (checkIfMatchToCurFilter(email))
-                setEmails(prevEmails => [...prevEmails, savedEmail])
-            showSuccessMsg('Email send.')
+            if (checkIfMatchToCurFilter(savedEmail)) {
+                if (checkIfEmailExsist(savedEmail.id))
+                    setEmails(prevEmails => prevEmails.map(e => e.id === savedEmail.id ? savedEmail : e))
+                else
+                    setEmails(prevEmails => [...prevEmails, savedEmail])
+            }
+            else {
+                setEmails(prevEmails => prevEmails.filter(e => e.id !== email.id))
+            }
+            showSuccessMsg(okMsg)
+            return savedEmail
 
         } catch (err) {
-            console.log('Error in onSendEmail', err)
-            showErrorMsg('Could not send email')
-
+            console.log('Error in onComposeEmail', err)
+            showErrorMsg(errMsg)
         }
 
     }
@@ -163,6 +191,27 @@ export function EmailIndex() {
         }
     }
 
+    async function onReadEmailDetails(email) {
+
+        try {
+            //const email = await emailService.getById(emailId)
+            if (checkIfMatchToCurFilter(email)) {
+                setEmails(prevEmails => prevEmails.map(e => {
+                    if (e.id == email.id)
+                        e.isRead = email.isRead
+                    return e
+                }))
+            }
+
+            else
+                setEmails(prevEmails => prevEmails.filter(e => e.id !== email.id))
+
+        } catch (err) {
+            console.log('Error in onReadEmailDetails', err)
+        }
+
+    }
+
 
     if (!emails) return <div>Loading...</div>
     return (
@@ -172,8 +221,8 @@ export function EmailIndex() {
             <div className="main-content">
 
                 {!params.emailId && <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />}
-                <Outlet />
-                {searchParams.get("compose") && <EmailCompose onSendEmail={onSendEmail} />}
+                <Outlet context={onReadEmailDetails} />
+                {searchParams.get("compose") && <EmailCompose onComposeEmail={onComposeEmail} />}
 
 
                 {/* outlet is renders the emailDetails cmp */}

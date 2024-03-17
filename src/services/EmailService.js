@@ -26,16 +26,10 @@ const STORAGE_KEY = 'emails'
 _createEmails()
 
 async function query(filterBy) {
-    console.log("filter in query", filterBy);
     let emails = await storageService.query(STORAGE_KEY)
-    console.log("before filter", emails);
     if (filterBy) {
         emails = filterEmails(emails, filterBy)
-        console.log("after filter", emails);
-
     }
-
-
     return emails
 }
 
@@ -63,7 +57,7 @@ function filterEmails(emails, filterBy) {
         case 'inbox':
             return filteredEmails.filter(email => email.to === loggedinUser.email && !email.removedAt)
         case 'sent':
-            return filteredEmails.filter(email => email.from === loggedinUser.email && !email.removedAt)
+            return filteredEmails.filter(email => email.from === loggedinUser.email && !email.removedAt && email.sentAt)
         case 'starred':
             return filteredEmails.filter(email => email.isStarred && !email.removedAt)
         case 'drafts':
@@ -90,17 +84,14 @@ function remove(id) {
 }
 
 function save(emailToSave) {
-    console.log("in save email, e:", emailToSave);
-    if (emailToSave.id) {
-        console.log("id exsist");
+    if (emailToSave.id)
         return storageService.put(STORAGE_KEY, emailToSave)
-    } else {
+    else
         return storageService.post(STORAGE_KEY, emailToSave)
-    }
 }
 
-function createEmail(subject, body = '', isRead = true,
-    isStarred = false, sentAt = new Date(), removedAt = null, from = loggedinUser.email, to) {
+function createEmail(subject = '', body = '', isRead = true,
+    isStarred = false, sentAt = null, removedAt = null, from = loggedinUser.email, to = '') {
     return {
 
         subject,
@@ -213,7 +204,7 @@ function getDefaultFilter(folder) {
         // folder: folder ? folder : 'inbox',
         folder: 'inbox',
         txt: '',
-        isRead: null
+        isRead: 'null'
     }
 }
 
@@ -224,7 +215,7 @@ function getFilterFromParams(searchParams) {
     for (const field in defaultFilter)
         filterBy[field] = searchParams.get(field) || defaultFilter[field]
 
-    console.log("filterBy in get filter", filterBy);
+    //console.log("filterBy in get filter", filterBy);
     return filterBy
 }
 

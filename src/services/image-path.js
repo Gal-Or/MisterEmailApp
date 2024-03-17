@@ -16,7 +16,8 @@ export default {
     keep: `https://www.gstatic.com/companion/icon_assets/keep_2020q4v3_2x.png`,
     tasks: `https://www.gstatic.com/companion/icon_assets/tasks_2021_2x.png`,
     contacts: `https://www.gstatic.com/companion/icon_assets/contacts_2022_2x.png`,
-    x: `https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_close_16px_1x.png`
+    x: `https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_close_16px_1x.png`,
+    back: 'https://ssl.gstatic.com/ui/v1/icons/mail/gm3/1x/arrow_back_baseline_nv700_20dp.png'
 
 }
 
