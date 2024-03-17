@@ -9,6 +9,11 @@
     grid-row: 2;
 }
 
+.right-symbols {
+    grid-column: 3;
+    grid-row: 1/-1;
+}
+
 .main-content {
     height: 85vh;
     background-color: white;

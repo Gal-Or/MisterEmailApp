@@ -11,8 +11,10 @@
 @import "./pages/emailIndex.css";
 
 /* Components */
+@import "./cmps/Icon.css";
 @import "./cmps/app-header.css";
 @import "./cmps/MenuBar.css";
+@import "./cmps/RightSymbols.css";
 @import "./cmps/EmailList.css";
 @import "./cmps/EmailFilter.css";
 @import "./cmps/EmailPreview.css";

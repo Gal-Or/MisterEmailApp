@@ -1,0 +1,12 @@
+.icon-div {
+    display: flex;
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.icon-img {
+    width: 20px;
+}

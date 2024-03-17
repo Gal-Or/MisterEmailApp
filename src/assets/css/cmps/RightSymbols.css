@@ -1,0 +1,27 @@
+.right-symbols {
+
+    display: grid;
+    grid-template-rows: subgrid;
+    justify-content: center;
+}
+
+.user-symbol {
+    align-self: center;
+    padding-right: 8px;
+}
+
+.user-letter-icon {
+    width: 34px;
+    border-radius: 20px;
+    padding: 2px;
+    border: 2px solid red;
+}
+
+.mid-symbols {
+    grid-row: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}

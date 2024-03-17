@@ -6,6 +6,7 @@ import { emailService } from "../services/EmailService"
 
 import { AppHeader } from '../cmps/AppHeader.jsx';
 import { MenuBar } from '../cmps/MenuBar.jsx';
+import { RightSymbols } from '../cmps/RightSymbols.jsx';
 import { EmailList } from "../cmps/EmailList"
 import { AppFooter } from '../cmps/AppFooter.jsx';
 import path from "../services/image-path";
@@ -218,14 +219,12 @@ export function EmailIndex() {
         <section className='main-app' >
             <AppHeader filterBy={{ txt, isRead }} onSetFilter={onSetFilter} />
             <MenuBar filterBy={{ folder }} onSetFilter={onSetFilter} unreadCount={unreadCount} searchParams={searchParams} />
+            <RightSymbols />
             <div className="main-content">
-
                 {!params.emailId && <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />}
                 <Outlet context={onReadEmailDetails} />
-                {searchParams.get("compose") && <EmailCompose onComposeEmail={onComposeEmail} />}
-
-
                 {/* outlet is renders the emailDetails cmp */}
+                {searchParams.get("compose") && <EmailCompose onComposeEmail={onComposeEmail} />}
             </div>
 
             {/* <AppFooter /> */}
