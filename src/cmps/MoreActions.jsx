@@ -5,12 +5,9 @@ export function MoreActions() {
 
     return (
         <section className="more-symbols">
-
             <Icon path={path.googleApps} />
             <Icon path={path.googleApps} />
             <Icon path={path.googleApps} />
-
-
         </section>
     )
 }

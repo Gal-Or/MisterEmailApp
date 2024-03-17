@@ -7,6 +7,7 @@ import { emailService } from "../services/EmailService"
 import { AppHeader } from '../cmps/AppHeader.jsx';
 import { MenuBar } from '../cmps/MenuBar.jsx';
 import { RightSymbols } from '../cmps/RightSymbols.jsx';
+import { ListActions } from "../cmps/ListActions.jsx";
 import { EmailList } from "../cmps/EmailList"
 import { AppFooter } from '../cmps/AppFooter.jsx';
 import path from "../services/image-path";
@@ -195,7 +196,6 @@ export function EmailIndex() {
     async function onReadEmailDetails(email) {
 
         try {
-            //const email = await emailService.getById(emailId)
             if (checkIfMatchToCurFilter(email)) {
                 setEmails(prevEmails => prevEmails.map(e => {
                     if (e.id == email.id)
@@ -203,7 +203,6 @@ export function EmailIndex() {
                     return e
                 }))
             }
-
             else
                 setEmails(prevEmails => prevEmails.filter(e => e.id !== email.id))
 
@@ -221,6 +220,7 @@ export function EmailIndex() {
             <MenuBar filterBy={{ folder }} onSetFilter={onSetFilter} unreadCount={unreadCount} searchParams={searchParams} />
             <RightSymbols />
             <div className="main-content">
+                <ListActions />
                 {!params.emailId && <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />}
                 <Outlet context={onReadEmailDetails} />
                 {/* outlet is renders the emailDetails cmp */}

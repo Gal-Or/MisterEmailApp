@@ -16,6 +16,7 @@
 @import "./cmps/MenuBar.css";
 @import "./cmps/RightSymbols.css";
 @import "./cmps/EmailList.css";
+@import "./cmps/ListActions.css";
 @import "./cmps/EmailFilter.css";
 @import "./cmps/EmailPreview.css";
 @import "./cmps/EmailDetails.css";

@@ -44,6 +44,7 @@
      height: 32px;
      display: grid;
      grid-template-columns: subgrid;
+     align-items: center;
  }
 
  .folder-des {
