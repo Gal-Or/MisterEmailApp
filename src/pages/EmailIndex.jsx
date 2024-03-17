@@ -209,9 +209,7 @@ export function EmailIndex() {
         } catch (err) {
             console.log('Error in onReadEmailDetails', err)
         }
-
     }
-
 
     if (!emails) return <div>Loading...</div>
     return (
@@ -220,7 +218,7 @@ export function EmailIndex() {
             <MenuBar filterBy={{ folder }} onSetFilter={onSetFilter} unreadCount={unreadCount} searchParams={searchParams} />
             <RightSymbols />
             <div className="main-content">
-                <ListActions />
+                {/* <ListActions /> */}
                 {!params.emailId && <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onSetIsRead={onSetIsRead} onStaring={onStaring} />}
                 <Outlet context={onReadEmailDetails} />
                 {/* outlet is renders the emailDetails cmp */}

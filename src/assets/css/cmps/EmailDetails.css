@@ -3,20 +3,9 @@
     grid-auto-flow: row;
 }
 
-.actions-section {
+/* .actions-section {
     padding: 5px;
-}
-
-.back-icon {
-
-    padding: 10px;
-    cursor: pointer;
-}
-
-.back-icon:hover {
-    background-color: aliceblue;
-    border-radius: 15px;
-}
+} */
 
 .from-div {
     display: flex;

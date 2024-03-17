@@ -11,3 +11,8 @@
     width: 20px;
     color: var(--icon-color);
 }
+
+.icon-img:hover {
+    background-color: aliceblue;
+    border-radius: 15px;
+}

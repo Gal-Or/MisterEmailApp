@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useOutletContext } from "react-router-dom";
 
+import { EmailDetailsActions } from "./EmailDetailsActions";
+
 import { emailService } from "../services/EmailService";
 
 import { FaCircleUser } from "react-icons/fa6";
+
 
 export function EmailDetails() {
 
@@ -23,7 +26,6 @@ export function EmailDetails() {
             onEmailChanged()
     }, [email])
 
-
     async function loadEmail() {
         try {
             let curEmail = await emailService.getById(params.emailId)
@@ -41,16 +43,19 @@ export function EmailDetails() {
 
     if (!email) return <div>Loading..</div>
     return (
-        <div className="email-details-container">
-            <h1> {email.subject}</h1>
-            <div className="from-div">
-                <FaCircleUser className="user-icon" />
-                <h3 className="from">{email.from}</h3>
+        <>
+            <EmailDetailsActions />
+            <div className="email-details-container">
+                <h1> {email.subject}</h1>
+                <div className="from-div">
+                    <FaCircleUser className="user-icon" />
+                    <h3 className="from">{email.from}</h3>
+                </div>
+                <div>
+                    <p>{email.body}</p>
+                </div>
             </div>
-            <div>
-                <p>{email.body}</p>
-            </div>
-        </div>
+        </>
     )
 
 }
