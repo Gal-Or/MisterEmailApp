@@ -1,6 +1,7 @@
 .filter-container {
     margin: 10px;
     display: flex;
+    width: 100%;
 }
 
 .search-by-txt {
@@ -11,8 +12,9 @@
     border-radius: 24px;
     border: none;
     box-sizing: border-box;
-    min-height: 48px;
-    max-width: 720px;
+    width: 100%;
+    min-width: 200px;
+    height: 44px;
     white-space: nowrap;
     font: 13px/27px Roboto, Arial, sans-serif;
 
@@ -23,7 +25,7 @@
     border-radius: 24px;
     border: none;
     box-sizing: border-box;
-    min-height: 48px;
+    height: 44px;
     font: 13px/27px Roboto, Arial, sans-serif;
 
 }

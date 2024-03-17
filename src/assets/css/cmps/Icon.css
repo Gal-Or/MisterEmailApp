@@ -9,4 +9,5 @@
 
 .icon-img {
     width: 20px;
+    color: var(--icon-color);
 }

@@ -27,9 +27,19 @@
     margin: 12px;
 }
 
+.center-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.more-symbols {
+    display: flex;
+}
+
 .input-search {
     grid-column: 2;
-
+    grid-row: 1;
     border: none;
     padding: 10px;
     margin: 0px;
@@ -37,22 +47,22 @@
     width: 80%;
     background-color: aliceblue;
     border-radius: 30px;
-    /* z-index: 6; */
-    /* left: 0px; */
+}
 
+.more-symbols {
+    grid-column: 2;
+    grid-row: 1;
 
 }
 
-.links-container {
+/* .links-container {
     grid-column: 2;
     align-self: center;
+} */
 
-}
-
-.link {
+/* .link {
     margin: 5px;
-
-}
+} */
 
 .buttonIn {
     width: 300px;
