@@ -1,24 +1,43 @@
 .email-details-container {
     display: grid;
-    grid-auto-flow: row;
+    /* grid-auto-flow: row; */
+    grid-template-columns: 60px auto;
+    margin: 30px;
 }
 
-/* .actions-section {
-    padding: 5px;
-} */
+.subject {
+    margin-bottom: 5px;
+    grid-row: 1;
+    grid-column: 2;
+}
 
 .from-div {
-    display: flex;
+    display: grid;
+    grid-row: subgrid;
+    grid-template-columns: subgrid;
+    grid-column: 1/-1;
     align-items: center;
     margin: 10px;
 }
 
+.body-div {
+    margin: 10px 0 10px 0;
+    grid-row: 3;
+    grid-column: 2;
+}
+
 .user-icon {
+    grid-column: 1;
     height: 40px;
     width: 40px;
 }
 
 .from {
-    margin-left: 10px;
     font-weight: bold;
+}
+
+.map-div {
+    margin: 30px;
+    grid-row: 4;
+    grid-column: 2;
 }

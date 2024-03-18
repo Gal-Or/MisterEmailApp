@@ -101,7 +101,8 @@ function createEmail(subject = '', body = '', isRead = true,
         sentAt,
         removedAt,
         from,
-        to
+        to,
+        location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
     }
 }
 
@@ -122,7 +123,9 @@ function _createEmails() {
                 sentAt: Date.now(),
                 removedAt: null,
                 from: 'koko@gmail.com',
-                to: 'galor@gmail.com'
+                to: 'galor@gmail.com',
+                location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
+
             }, {
                 id: 'e2',
                 subject: 'Hey',
@@ -132,7 +135,8 @@ function _createEmails() {
                 sentAt: (date),
                 removedAt: null,
                 from: 'galor@gmail.com',
-                to: 'nofar@gmail.com'
+                to: 'nofar@gmail.com',
+                location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
             }, {
                 id: 'e3',
                 subject: 'Miss you!',
@@ -142,7 +146,8 @@ function _createEmails() {
                 sentAt: 1677500285,
                 removedAt: null,
                 from: 'galor@gmail.com',
-                to: 'noy@gmail.com'
+                to: 'noy@gmail.com',
+                location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
             }, {
                 id: 'e4',
                 subject: 'Love you!',
@@ -152,7 +157,8 @@ function _createEmails() {
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'dodi@gmail.com',
-                to: 'galor@gmail.com'
+                to: 'galor@gmail.com',
+                location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
             }, {
                 id: 'e5',
                 subject: 'Hate you!',
@@ -162,7 +168,8 @@ function _createEmails() {
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'sozi@gmail.com',
-                to: 'galor@gmail.com'
+                to: 'galor@gmail.com',
+                location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
             }, {
                 id: 'e6',
                 subject: 'Good Luck!',
@@ -172,7 +179,8 @@ function _createEmails() {
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'galor@gmail.com',
-                to: 'shalom@gmail.com'
+                to: 'shalom@gmail.com',
+                location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
             }, {
                 id: 'e7',
                 subject: 'Shalom!',
@@ -182,7 +190,8 @@ function _createEmails() {
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'galor@gmail.com',
-                to: 'kobi@gmail.com'
+                to: 'kobi@gmail.com',
+                location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
             }, {
                 id: 'e8',
                 subject: 'Mazal Tov!',
@@ -192,7 +201,8 @@ function _createEmails() {
                 sentAt: 1709043485,
                 removedAt: null,
                 from: 'avi@gmail.com',
-                to: 'galor@gmail.com'
+                to: 'galor@gmail.com',
+                location: { lat: utilService.getRandomInRange(-90, 90, 5), lng: utilService.getRandomInRange(-180, 180, 5) }
             }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)

@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useOutletContext } from "react-router-dom";
 
 import { EmailDetailsActions } from "./EmailDetailsActions";
+import { GoogleMap } from "./GoogleMap"
 
 import { emailService } from "../services/EmailService";
 
@@ -46,13 +47,17 @@ export function EmailDetails() {
         <>
             <EmailDetailsActions />
             <div className="email-details-container">
-                <h1> {email.subject}</h1>
+                <h1 className="subject"> {email.subject}</h1>
                 <div className="from-div">
                     <FaCircleUser className="user-icon" />
                     <h3 className="from">{email.from}</h3>
                 </div>
-                <div>
+                <div className="body-div">
                     <p>{email.body}</p>
+                </div>
+                <div className="map-div">
+                    <h3>Sender Location:</h3>
+                    <GoogleMap lat={email.location.lat} lng={email.location.lng} />
                 </div>
             </div>
         </>

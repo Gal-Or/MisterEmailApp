@@ -4,9 +4,14 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     monthName,
-    getSearchParamsArray
+    getSearchParamsArray,
+    getRandomInRange
 }
 
+function getRandomInRange(from, to, fixed) {
+    return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+    // .toFixed() returns string, so ' * 1' is a trick to convert to number
+}
 
 function monthName(num) {
     let monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
