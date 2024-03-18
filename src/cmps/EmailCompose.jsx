@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useSearchParams } from "react-router-dom";
 
 import { emailService } from '../services/EmailService';
+import { utilService } from "../services/util.service";
 
 export function EmailCompose({ onComposeEmail }) {
 
@@ -14,12 +15,23 @@ export function EmailCompose({ onComposeEmail }) {
     const [email, setEmail] = useState(emailService.createEmail())
     const [searchParams, setSearchParams] = useSearchParams()
 
+    const params = utilService.getSearchParamsArray(searchParams)
+    let backPath = `/${params["folder"]}?folder=${params["folder"]}&txt=${params["txt"]}&isRead=${params["isRead"]}`
+
+    const [help, setHelp] = useState({ to: null, subject: null })
+    let to = null
+    let subject = null
+
     const eid = searchParams.get('compose')
 
     useEffect(() => {
         if (eid !== 'new') {
             //console.log("eid:", eid);
             loadEmail()
+        } else {
+            to = searchParams.get('to')
+            subject = searchParams.get('subject')
+            setEmail(prev => ({ ...prev, to: searchParams.get('to'), subject: searchParams.get('subject') }))
         }
     }, [])
 
@@ -63,7 +75,7 @@ export function EmailCompose({ onComposeEmail }) {
     async function sendEmail(ev) {
         ev.preventDefault()
         onComposeEmail({ ...email, sentAt: new Date() }, 'Email sent.', 'Cold not send email.')
-        navigate(-1)
+        navigate(backPath)
     }
 
     return (
@@ -71,7 +83,7 @@ export function EmailCompose({ onComposeEmail }) {
             <div className="compose-layout">
                 <div className='header-container'>
                     <header >New Message</header>
-                    <span className='icon-span' onClick={() => navigate(-1)} >
+                    <span className='icon-span' onClick={() => navigate(backPath)} >
                         <img className={'icon'}
                             src={path.x}
                             alt={'x'} />

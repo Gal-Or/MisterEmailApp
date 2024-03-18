@@ -17,6 +17,7 @@ export function AppHeader({ filterBy, onSetFilter }) {
             </div>
             <div className="center-div">
                 <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+                <Link to={"/home"}>Home</Link >
                 <MoreActions />
             </div>
         </header>

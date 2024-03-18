@@ -21,7 +21,6 @@ export function MenuBar({ filterBy, onSetFilter, unreadCount, searchParams }) {
     // });
 
     const params = utilService.getSearchParamsArray(searchParams)
-
     let paramsPath = `?folder=${params["folder"]}&txt=${params["txt"]}&isRead=${params["isRead"]}&compose=new`
 
     useEffect(() => {

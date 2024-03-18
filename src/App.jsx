@@ -1,4 +1,4 @@
-import { Route, Routes, HashRouter as Router } from 'react-router-dom'
+import { Route, Routes, HashRouter as Router, Navigate } from 'react-router-dom'
 import { useLocation, useNavigate, Outlet, useParams } from 'react-router-dom'
 
 
@@ -15,12 +15,13 @@ import { useEffect } from 'react';
 export function App() {
 
 
-    function HomePage() {
-        const navigate = useNavigate()
-        useEffect(() => {
-            navigate('inbox')
-        }, [])
-    }
+    // function HomePage() {
+    //     // const navigate = useNavigate()
+    //     // useEffect(() => {
+    //     //     navigate('inbox')
+    //     // }, [])
+    //     return <h1>home page</h1>
+    // }
 
     return (
         <Router>
@@ -30,8 +31,10 @@ export function App() {
                         <Route path="/about" element={<AboutUs />} /> */}
                     {/* <Route path="/" element={<EmailIndex filterBy={filterBy} />} /> */}
 
-                    <Route path="/" element={<HomePage />} />
+                    <Route index path="/home" element={<HomePage />} />
+                    <Route path="/" element={<Navigate to={"/inbox"} />} />
                     <Route path="/:folder" element={<EmailIndex />}>
+
                         <Route path="/:folder/:emailId" element={<EmailDetails />} />
                         {/* <Route path="/:folder/compose" element={<EmailCompose />} /> */}
                     </Route>

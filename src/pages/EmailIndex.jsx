@@ -34,9 +34,9 @@ export function EmailIndex() {
         getUnreadCountFromService()
     })
 
-
     useEffect(() => {
-        setSearchParams(filterBy)
+        if (searchParams.get("compose") === "help")
+            setSearchParams({ ...filterBy, compose: 'help' })
         //console.log(filterBy);
         loadEmails()
     }, [filterBy])
