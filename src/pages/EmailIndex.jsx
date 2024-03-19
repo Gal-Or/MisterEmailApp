@@ -35,12 +35,37 @@ export function EmailIndex() {
     })
 
     useEffect(() => {
-        if (searchParams.get("compose") === "help")
-            setSearchParams({ ...filterBy, compose: 'help' })
-        //console.log(filterBy);
+        // if (searchParams.get("compose") === "help")
+        //     setSearchParams({ ...filterBy, compose: 'help' })
+        // else if (searchParams.get("compose") === "new")
+        //     setSearchParams({ ...filterBy, compose: 'new' })
+        // else if (searchParams.get("compose"))
+        //     setSearchParams({ ...filterBy, compose: searchParams.get("compose") })
+        // else
+        //     setSearchParams(filterBy)
+        setComposeParam()
         loadEmails()
     }, [filterBy])
     /* use effect listening to changes on filterBy that occure in appHeader and menuBar*/
+
+    function setComposeParam() {
+        let value = searchParams.get("compose")
+        if (value) {
+            switch (value) {
+                case 'help':
+                    setSearchParams({ ...filterBy, compose: 'help' })
+                    return
+                case 'new':
+                    setSearchParams({ ...filterBy, compose: 'new' })
+                    return
+                default:
+                    setSearchParams({ ...filterBy, compose: searchParams.get("compose") })
+                    return
+            }
+        } else
+            setSearchParams(filterBy)
+
+    }
 
     function addSearchParams(params) {
         setSearchParams(params)

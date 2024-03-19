@@ -7,13 +7,15 @@
 
 .user-symbol {
     align-self: center;
-    padding-right: 8px;
+    padding-right: 12px;
+
 }
 
 .user-letter-icon {
-    width: 34px;
+    width: 43px;
+    height: 43px;
     border-radius: 20px;
-    padding: 2px;
+    padding: 4px;
     border: 2px solid red;
 }
 

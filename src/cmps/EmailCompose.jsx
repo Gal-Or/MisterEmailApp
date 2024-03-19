@@ -18,7 +18,6 @@ export function EmailCompose({ onComposeEmail }) {
     const params = utilService.getSearchParamsArray(searchParams)
     let backPath = `/${params["folder"]}?folder=${params["folder"]}&txt=${params["txt"]}&isRead=${params["isRead"]}`
 
-    const [help, setHelp] = useState({ to: null, subject: null })
     let to = null
     let subject = null
 
@@ -78,16 +77,37 @@ export function EmailCompose({ onComposeEmail }) {
         navigate(backPath)
     }
 
+    function changeComposeSize() {
+        if (document.querySelector('.compose-layout').classList.contains('expand')) {
+            document.querySelector('.compose-layout').classList.remove('expand')
+            document.querySelector('.email-compose').classList.remove('expand-bg')
+            document.querySelector('.compose-size').src = path.expend
+        } else {
+            document.querySelector('.compose-layout').classList.add('expand')
+            document.querySelector('.email-compose').classList.add('expand-bg')
+            document.querySelector('.compose-size').src = path.deExpand
+        }
+    }
+
     return (
         <section className="email-compose">
-            <div className="compose-layout">
+            <div className="compose-layout small">
                 <div className='header-container'>
                     <header >New Message</header>
-                    <span className='icon-span' onClick={() => navigate(backPath)} >
-                        <img className={'icon'}
+                    <div className="window-actions">
+                        <img className={'img-icon'}
+                            src={path.minimize}
+                            alt={'_'} />
+                        <img className={'img-icon compose-size'}
+                            src={path.expend}
+                            alt={'expend'}
+                            onClick={() => changeComposeSize()} />
+                        <img className={'img-icon'}
                             src={path.x}
-                            alt={'x'} />
-                    </span>
+                            alt={'x'}
+                            onClick={() => navigate(backPath)} />
+                    </div>
+
                 </div>
                 <form className="compose-form" action="" onSubmit={(ev) => sendEmail(ev)}>
                     <input required className="to-inp" type="text" onChange={handleChange}

@@ -19,6 +19,9 @@ export default {
     contacts: `https://www.gstatic.com/companion/icon_assets/contacts_2022_2x.png`,
     googleApps: 'https://ssl.gstatic.com/gb/images/bar/al-icon.png',
     x: `https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_close_16px_1x.png`,
+    expend: 'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_open_in_full_16px_1x.png',
+    deExpand: 'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_close_fullscreen_16px_1x.png',
+    minimize: 'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_minimize_16px_1x.png',
     back: 'https://ssl.gstatic.com/ui/v1/icons/mail/gm3/1x/arrow_back_baseline_nv700_20dp.png'
 
 }
