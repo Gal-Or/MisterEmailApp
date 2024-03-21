@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
 import { IoIosSearch } from "react-icons/io";
+import { useEffectUpdate } from "../customHooks/useEffectUpdate.js"
 
 export function EmailFilter({ filterBy, onSetFilter }) {
     /* this use state is for two way data binding */
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
-    useEffect(() => {
+    useEffectUpdate(() => {
+
         onSetFilter(filterByToEdit)
     }, [filterByToEdit])
 

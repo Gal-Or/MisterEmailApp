@@ -18,6 +18,7 @@ import { EmailCompose } from "../cmps/EmailCompose.jsx";
 
 
 
+
 export function EmailIndex() {
     const params = useParams()
     const navigate = useNavigate()
@@ -35,14 +36,7 @@ export function EmailIndex() {
     })
 
     useEffect(() => {
-        // if (searchParams.get("compose") === "help")
-        //     setSearchParams({ ...filterBy, compose: 'help' })
-        // else if (searchParams.get("compose") === "new")
-        //     setSearchParams({ ...filterBy, compose: 'new' })
-        // else if (searchParams.get("compose"))
-        //     setSearchParams({ ...filterBy, compose: searchParams.get("compose") })
-        // else
-        //     setSearchParams(filterBy)
+        console.log("effect in emailIndex");
         setComposeParam()
         loadEmails()
     }, [filterBy])
@@ -144,17 +138,11 @@ export function EmailIndex() {
 
     function checkIfMatchToCurFilter(email) {
 
-        //console.log("in func ");
         let isMatch = true
         if (txt != '')
             isMatch = isMatchToTxt(email, txt)
 
-        //console.log("isMatch", isMatch);
-        //console.log("isRead", isRead);
-        //console.log("isRead === 'null'", isRead === 'null');
-
         if (isMatch && (isRead == `${email.isRead}` || isRead === 'null')) {
-            console.log("in if match");
             switch (folder) {
                 case 'sent':
                     return (email.from === emailService.loggedinUser.email && !email.removedAt && email.sentAt) ? true : false

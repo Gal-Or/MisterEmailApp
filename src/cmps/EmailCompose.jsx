@@ -7,10 +7,13 @@ import { useSearchParams } from "react-router-dom";
 import { emailService } from '../services/EmailService';
 import { utilService } from "../services/util.service";
 
+import { useEffectUpdate } from "../customHooks/useEffectUpdate.js"
+
 export function EmailCompose({ onComposeEmail }) {
 
-    const navigate = useNavigate()
+    let saveEmail = useRef(false)
     let ref = useRef()
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState(emailService.createEmail())
     const [searchParams, setSearchParams] = useSearchParams()
@@ -24,8 +27,8 @@ export function EmailCompose({ onComposeEmail }) {
     const eid = searchParams.get('compose')
 
     useEffect(() => {
+        console.log("in effect compose");
         if (eid !== 'new') {
-            //console.log("eid:", eid);
             loadEmail()
         } else {
             to = searchParams.get('to')
@@ -34,8 +37,7 @@ export function EmailCompose({ onComposeEmail }) {
         }
     }, [])
 
-    useEffect(() => {
-        console.log("email update!");
+    useEffectUpdate(() => {
         saveEditDraft()
     }, [email])
 
@@ -50,6 +52,10 @@ export function EmailCompose({ onComposeEmail }) {
     }
 
     async function saveEditDraft() {
+        // console.log("saveEmail=", saveEmail.current);
+        if (!saveEmail.current)
+            return
+
         try {
             if (ref.current) {
                 clearTimeout(ref.current)
@@ -58,7 +64,7 @@ export function EmailCompose({ onComposeEmail }) {
             ref.current = setTimeout(async () => {
                 let e = await onComposeEmail(email, 'Email saved to drafts.', 'Could not save email.')
                 if (!email.id)
-                    setEmail(e)
+                    email.id = e.id //setEmail(e)
             }, 5000)
         } catch (err) {
             console.log('error in saveEditDraft', err);
@@ -68,6 +74,7 @@ export function EmailCompose({ onComposeEmail }) {
     async function handleChange(ev) {
         let { value, name: field, type } = ev.target
         //value = type === 'number' ? +value : value
+        saveEmail.current = true
         setEmail(prev => ({ ...prev, [field]: value }))
     }
 
