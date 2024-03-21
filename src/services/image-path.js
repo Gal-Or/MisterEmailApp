@@ -1,4 +1,6 @@
+
 const base = 'https://ssl.gstatic.com/ui/v1/icons/mail/gm3/1x/'
+
 export default {
     deleteImg: `${base}delete_baseline_nv700_20dp.png`,
     unreadImg: `${base}mark_email_unread_baseline_nv700_20dp.png`,
@@ -22,7 +24,8 @@ export default {
     expend: 'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_open_in_full_16px_1x.png',
     deExpand: 'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_close_fullscreen_16px_1x.png',
     minimize: 'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/ic_minimize_16px_1x.png',
-    back: 'https://ssl.gstatic.com/ui/v1/icons/mail/gm3/1x/arrow_back_baseline_nv700_20dp.png'
+    back: 'https://ssl.gstatic.com/ui/v1/icons/mail/gm3/1x/arrow_back_baseline_nv700_20dp.png',
+
 
 }
 

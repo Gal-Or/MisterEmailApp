@@ -1,10 +1,15 @@
 .icon-div {
     display: flex;
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.icon-div:hover {
+    background-color: rgba(232, 228, 228, 0.616);
+    border-radius: 20px;
 }
 
 .icon-img {
@@ -12,7 +17,7 @@
     color: var(--icon-color);
 }
 
-.icon-img:hover {
+/* .icon-img:hover {
     background-color: aliceblue;
     border-radius: 15px;
-}
+} */
