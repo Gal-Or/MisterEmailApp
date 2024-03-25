@@ -23,8 +23,8 @@ export function EmailList({ emails, onRemoveEmail, onSetIsRead, onStaring }) {
                         </div>
                         <EmailPreview email={email} />
                         <div className="email-actions hide">
-                            <button onClick={() => { onRemoveEmail(email.id) }}><IoTrashOutline className="icon" /></button>
-                            <button onClick={() => { onSetIsRead(email.isRead, email.id) }}>
+                            <button className="btn tooltip" onClick={() => { onRemoveEmail(email.id) }} datatype="Delete" ><IoTrashOutline className="icon" /></button>
+                            <button className="btn tooltip" onClick={() => { onSetIsRead(email.isRead, email.id) }} datatype={`Mark as ${email.isRead == true ? 'unread' : 'read'}`}>
                                 {email.isRead == true ? <MdOutlineMarkEmailUnread className="icon" /> : <BiEnvelopeOpen className="icon-action-btn" />}
                             </button>
                         </div>

@@ -42,10 +42,44 @@
     justify-self: end;
 }
 
-/* .email-actions>button {
-    border: unset;
-    background-color: transparent;
-} */
+.btn:hover {
+    background-color: rgba(232, 228, 228, 0.616);
+    border-radius: 20px;
+}
+
+.tooltip {
+    position: relative;
+    /* making the .tooltip span a container for the tooltip text */
+}
+
+
+
+.tooltip:before {
+    content: attr(datatype);
+    position: absolute;
+    top: 50%;
+    transform: translateY(50%);
+    /* basic styles */
+    font-weight: bold;
+    font-size: 12px;
+    width: max-content;
+    padding: 7px;
+    border-radius: 6px;
+    background: #4d4b4bc3;
+    color: #fff;
+    text-align: center;
+    display: none;
+    /* hide by default */
+}
+
+.btn:before {
+    transform: translateY(50%) translateX(-25%);
+}
+
+.tooltip:hover:before {
+    display: block;
+}
+
 
 .icon-action-btn {
     font-size: 17px;

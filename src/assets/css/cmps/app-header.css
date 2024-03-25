@@ -1,9 +1,6 @@
 .app-header {
     display: grid;
     grid-template-columns: subgrid;
-    /* align-items: center; */
-    /* margin: 5px; */
-
 }
 
 .menu-logo {
@@ -56,14 +53,6 @@
 
 }
 
-/* .links-container {
-    grid-column: 2;
-    align-self: center;
-} */
-
-/* .link {
-    margin: 5px;
-} */
 
 .buttonIn {
     width: 300px;

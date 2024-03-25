@@ -8,11 +8,11 @@ export function MoreActions() {
 
     return (
         <section className="more-symbols">
-            <div className='icon-div'>
-                <BsQuestionCircle className='icon settings-icon' />
+            <div className='icon-div tooltip' datatype='Support'>
+                <BsQuestionCircle className='icon support-icon' />
             </div>
-            <div className='icon-div'>
-                <IoSettingsOutline className='icon support-icon' />
+            <div className='icon-div tooltip' datatype='Settings'>
+                <IoSettingsOutline className='icon settings-icon' />
             </div>
 
 
